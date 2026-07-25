@@ -1,0 +1,384 @@
+/* ==========================================================================
+   OVRLK Labs — landing page
+   Tokens
+   ========================================================================== */
+
+:root {
+  --bg: #090b0f; /* Obsidian */
+  --bg-2: #171b22; /* Graphite */
+  --fg: #e8eef5; /* Ice */
+  --fg-dim: #77808c; /* Steel */
+  --line: rgba(232, 238, 245, 0.08);
+  --accent: #2d7ff9; /* Signal Blue */
+  --accent-hover: #4d94ff;
+  --ridge-back: #1e2430;
+  --ridge-mid: #12161d;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --max-width: 1200px;
+  --edge: clamp(24px, 5vw, 64px);
+}
+
+/* ==========================================================================
+   Reset
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+/* Visible keyboard focus */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Background grid overlay — subtle lab-schematic texture
+   ========================================================================== */
+
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
+}
+
+/* ==========================================================================
+   Topbar
+   ========================================================================== */
+
+.topbar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px var(--edge);
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--fg);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.wordmark:hover {
+  opacity: 0.85;
+}
+
+.logo-mark {
+  height: 18px;
+  width: auto;
+  display: block;
+}
+
+.labs-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--fg-dim);
+  padding-top: 1px;
+}
+
+.coords {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-dim);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 640px) {
+  .coords {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: 80vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  padding: 0 var(--edge) 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  padding-bottom: 96px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin: 0 0 20px;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(40px, 6vw, 68px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0 0 24px;
+}
+
+.sub {
+  font-size: 17px;
+  color: var(--fg-dim);
+  max-width: 480px;
+  margin: 0 0 36px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: var(--fg);
+  background: var(--accent);
+  padding: 14px 22px;
+  border-radius: 2px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.cta:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.cta .arrow {
+  transition: transform 0.15s ease;
+}
+
+.cta:hover .arrow {
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   Horizon SVG — signature element
+   ========================================================================== */
+
+.horizon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 340px;
+  z-index: 1;
+  overflow: visible;
+}
+
+.ridge {
+  fill: var(--bg-2);
+  stroke: none;
+}
+
+.ridge-back {
+  fill: var(--ridge-back);
+  opacity: 0.9;
+}
+
+.ridge-mid {
+  fill: var(--ridge-mid);
+  opacity: 0.95;
+}
+
+.ridge-front {
+  fill: var(--bg);
+}
+
+/* Ridge drift — each layer creeps sideways at a different, slow pace.
+   Readable ambient motion; still far from a spotlight sweep.
+   CSS transforms on SVG <g> need transform-box for reliable animation. */
+.ridge-layer {
+  transform-box: view-box;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.ridge-back-layer {
+  animation: driftBack 28s ease-in-out infinite;
+}
+
+.ridge-mid-layer {
+  animation: driftMid 20s ease-in-out infinite;
+  animation-delay: -4s;
+}
+
+.ridge-front-layer {
+  animation: driftFront 24s ease-in-out infinite;
+  animation-delay: -11s;
+}
+
+@keyframes driftBack {
+  0%, 100% { transform: translate3d(-40px, 0, 0); }
+  50% { transform: translate3d(40px, 0, 0); }
+}
+
+@keyframes driftMid {
+  0%, 100% { transform: translate3d(32px, 0, 0); }
+  50% { transform: translate3d(-32px, 0, 0); }
+}
+
+@keyframes driftFront {
+  0%, 100% { transform: translate3d(-24px, 0, 0); }
+  50% { transform: translate3d(24px, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ridge-back-layer,
+  .ridge-mid-layer,
+  .ridge-front-layer {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Status board
+   ========================================================================== */
+
+.status-board {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 64px var(--edge) 120px;
+  border-top: 1px solid var(--line);
+}
+
+.status-board .eyebrow {
+  margin-bottom: 28px;
+}
+
+.rows {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+}
+
+.row dt {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-dim);
+  letter-spacing: 0.08em;
+}
+
+.row dd {
+  margin: 0;
+  font-size: 15px;
+}
+
+.row dd a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.row dd a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.pulse-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: 8px;
+  vertical-align: middle;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(45, 127, 249, 0.4);
+  }
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 0 6px rgba(45, 127, 249, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-dot {
+    animation: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+footer {
+  position: relative;
+  z-index: 2;
+  padding: 28px var(--edge) 40px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-dim);
+}

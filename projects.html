@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — OVRLK Labs</title>
+  <meta name="description" content="Projects under the OVRLK Labs umbrella — small, sharp software by Clint Losee." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="wordmark" href="index.html">
+      <img class="logo-mark" src="assets/logo.svg" alt="OVRLK" width="166" height="19" />
+      <span class="labs-tag">LABS</span>
+    </a>
+    <div class="coords">40.1652&deg; N, 111.6108&deg; W &mdash; Springville, UT</div>
+  </header>
+
+  <main>
+    <section class="page-intro">
+      <p class="eyebrow">OVRLK LABS &mdash; PROJECTS</p>
+      <h1>What&rsquo;s under the umbrella.</h1>
+      <p class="sub">
+        Small, sharp tools shipping under OVRLK Labs.
+        More will land here as they go live.
+      </p>
+    </section>
+
+    <section class="projects" aria-label="Projects">
+      <article class="project">
+        <div class="project-meta">
+          <span class="project-status"><span class="pulse-dot" aria-hidden="true"></span> Building</span>
+          <span class="project-tag">Self-hosted</span>
+        </div>
+        <h2 class="project-name">Social Poster</h2>
+        <p class="project-desc">
+          A private scheduling and publishing tool for Instagram and Facebook —
+          media library, calendar, and Meta Graph publish in one stack.
+        </p>
+        <ul class="project-stack" aria-label="Stack">
+          <li>Nuxt 4</li>
+          <li>Turso</li>
+          <li>Better Auth</li>
+          <li>Cloudflare R2</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> OVRLK Labs. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

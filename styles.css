@@ -1,18 +1,32 @@
 /* ==========================================================================
    OVRLK Labs — landing page
    Tokens
+
+   Brand palette
+     Night Sky    #101820  — page background
+     Granite      #343A40  — surfaces, ridge layers
+     Glacier      #DCE8E8  — primary text
+     Alpine Blue  #4C7A8C  — interactive (links, pulse, focus)
+     Sandstone    #C7A77A  — warm accent (eyebrows, CTA)
+
+   Derived (not brand swatches): fg-dim, line, *hover, ridge-mid/back
    ========================================================================== */
 
 :root {
-  --bg: #090b0f; /* Obsidian */
-  --bg-2: #171b22; /* Graphite */
-  --fg: #e8eef5; /* Ice */
-  --fg-dim: #77808c; /* Steel */
-  --line: rgba(232, 238, 245, 0.08);
-  --accent: #2d7ff9; /* Signal Blue */
-  --accent-hover: #4d94ff;
-  --ridge-back: #1e2430;
-  --ridge-mid: #12161d;
+  /* Brand */
+  --bg: #101820; /* Night Sky */
+  --bg-2: #343A40; /* Granite */
+  --fg: #DCE8E8; /* Glacier */
+  --accent: #4C7A8C; /* Alpine Blue */
+  --warm: #C7A77A; /* Sandstone */
+
+  /* Derived */
+  --fg-dim: #8A9B9E; /* Glacier × Alpine */
+  --line: rgba(220, 232, 232, 0.1);
+  --accent-hover: #5E90A3;
+  --warm-hover: #D4B88F;
+  --ridge-back: #2A3238;
+  --ridge-mid: #1A2228;
 
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -158,7 +172,7 @@ button:focus-visible {
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.12em;
-  color: var(--accent);
+  color: var(--warm);
   margin: 0 0 20px;
   text-transform: uppercase;
 }
@@ -187,10 +201,9 @@ button:focus-visible {
   font-size: 14px;
   letter-spacing: 0.02em;
   text-decoration: none;
-  color: var(--fg);
-  background: var(--accent);
+  color: var(--bg);
+  background: var(--warm);
   padding: 14px 22px;
-  border-radius: 2px;
   transition: transform 0.15s ease, background 0.15s ease;
 }
 
@@ -202,7 +215,7 @@ button:focus-visible {
 }
 
 .cta:hover {
-  background: var(--accent-hover);
+  background: var(--warm-hover);
   transform: translateY(-1px);
 }
 
@@ -363,11 +376,11 @@ button:focus-visible {
 @keyframes pulse {
   0%, 100% {
     opacity: 1;
-    box-shadow: 0 0 0 0 rgba(45, 127, 249, 0.4);
+    box-shadow: 0 0 0 0 rgba(76, 122, 140, 0.45);
   }
   50% {
     opacity: 0.6;
-    box-shadow: 0 0 0 6px rgba(45, 127, 249, 0);
+    box-shadow: 0 0 0 6px rgba(76, 122, 140, 0);
   }
 }
 
@@ -427,13 +440,13 @@ button:focus-visible {
   padding: 28px 28px 32px;
   border: 1px solid var(--line);
   background:
-    linear-gradient(180deg, rgba(45, 127, 249, 0.04) 0%, transparent 42%),
+    linear-gradient(180deg, rgba(76, 122, 140, 0.08) 0%, transparent 42%),
     var(--bg-2);
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .project:hover {
-  border-color: rgba(45, 127, 249, 0.35);
+  border-color: rgba(76, 122, 140, 0.45);
   transform: translateY(-2px);
 }
 

@@ -471,6 +471,10 @@ button:focus-visible {
   color: var(--fg-dim);
 }
 
+.italic {
+  font-style: italic;
+}
+
 .project-name {
   font-family: var(--font-display);
   font-weight: 600;
@@ -478,6 +482,12 @@ button:focus-visible {
   letter-spacing: -0.01em;
   margin: 0;
   line-height: 1.15;
+}
+
+.project-logo {
+  display: block;
+  height: 28px;
+  width: auto;
 }
 
 .project-desc {
